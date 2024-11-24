@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://php-react.smobu.cloud/",
+  "homepage": "https://saman-chat.smobu.cloud/",
   "dependencies": {
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.5",
