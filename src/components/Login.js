@@ -35,7 +35,7 @@ function Login({ onLoginSuccess }) {
       formData.append('password', password);
       formData.append('security_key', hashedKey); // Include the hashed key
 
-      const response = await fetch('https://login.smobu.cloud/bu_kunkorn1.php', {
+      const response = await fetch('https://login.smobu.cloud/secure_react.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
