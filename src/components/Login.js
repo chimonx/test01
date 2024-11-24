@@ -18,9 +18,10 @@ function Login({ onLoginSuccess }) {
     if (!usernamePattern.test(username)) {
       Swal.fire({
         title: 'Invalid Username',
-        text: 'Username must follow the format: anyname.1letter or anyname.4letters.',
+        text: 'Username ชื่อของตนเอง.(จุด)นามสกุล 4 ตัวอักษร สำหรับนักศึกษา เช่น kunkorn.trak ',
         icon: 'error',
-        confirmButtonText: 'OK',
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Try Again',
       });
       return;
     }
