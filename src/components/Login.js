@@ -12,6 +12,19 @@ function Login({ onLoginSuccess }) {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    // Validate username with regex: any text + "." + exactly 1 or 4 letters only
+    const usernamePattern = /^[a-zA-Z0-9]+\.[a-zA-Z]{1}$|^[a-zA-Z0-9]+\.[a-zA-Z]{4}$/;
+
+    if (!usernamePattern.test(username)) {
+      Swal.fire({
+        title: 'Invalid Username',
+        text: 'Username must follow the format: anyname.1letter or anyname.4letters.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -47,7 +60,6 @@ function Login({ onLoginSuccess }) {
       const result = await response.json();
 
       if (result.status === 'studentOK' || result.status === 'facultyOK') {
-        // Show a success alert
         Swal.fire({
           title: 'Login Successful',
           text: `Welcome, ${username}`,
@@ -57,16 +69,13 @@ function Login({ onLoginSuccess }) {
           showConfirmButton: false, // Hide the confirm button
         });
 
-        // Save login info to Firestore
         await addDoc(collection(db, 'logins'), {
           username: username,
           loginTime: new Date().toISOString(),
         });
 
-        // Call the onLoginSuccess function to update authentication state
         onLoginSuccess(username);
       } else {
-        // Show an error alert
         Swal.fire({
           title: 'Login Failed',
           text: result.message,
@@ -76,7 +85,6 @@ function Login({ onLoginSuccess }) {
         });
       }
     } catch (error) {
-      // Show an error alert for fetch failure
       Swal.fire({
         title: 'Error',
         text: 'An error occurred during login. Please try again.',

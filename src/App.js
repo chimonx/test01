@@ -50,7 +50,6 @@ function App() {
           setUsername('');
         }
       } catch (error) {
-        console.error('Error checking session:', error);
       }
     };
 
