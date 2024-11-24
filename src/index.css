@@ -1,0 +1,196 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  line-height: 1.6;
+  overflow-y: auto; /* Ensure scrolling is enabled globally */
+}
+
+/* Prevent scrolling on the login page */
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* Container */
+.container {
+  max-width: 800px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px auto;
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.logout-btn {
+  background-color: #ff6347;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.logout-btn:hover {
+  background-color: #ff4500;
+}
+
+/* Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Post Items */
+.post-item {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-item h2 {
+  font-size: 22px;
+  color: #007bff;
+}
+
+.post-item p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Buttons Inside Posts */
+.like-btn {
+  background-color: #ffcc00;
+  color: #333;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.like-btn:hover {
+  background-color: #e6b800;
+}
+
+.delete-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.delete-btn:hover {
+  background-color: #e60000;
+}
+
+/* Comment Section */
+.comment-section {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.comment-section form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.comment-section input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.comment-section button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.comment-section button:hover {
+  background-color: #0056b3;
+}
+
+/* Search Bar */
+.search-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-container input {
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Prevent scrolling on the login page */
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Ensure scrolling is enabled globally */
+body {
+  overflow-y: auto;
+}
