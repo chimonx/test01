@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://saman-chat.smobu.cloud/",
+  "homepage": "https://chimonx.github.io/test01/",
   "dependencies": {
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.5",
