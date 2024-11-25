@@ -10,37 +10,34 @@ import {
 import PostList from './components/PostList';
 import Login from './components/Login';
 
+// Utility function for hashing the security key
+async function hashSecurityKey(securityKey) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(securityKey);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  return btoa(String.fromCharCode(...new Uint8Array(hashBuffer)));
+}
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('');
 
-  // Updated useEffect to include security key handling
   useEffect(() => {
     const checkSession = async () => {
       try {
-        // Get the security key from the environment variable
         const securityKey = process.env.REACT_APP_SECURITY_KEY;
+        const hashedKey = await hashSecurityKey(securityKey);
 
-        // Hash the security key using the Web Crypto API and encode in Base64
-        const encoder = new TextEncoder();
-        const data = encoder.encode(securityKey);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashString = String.fromCharCode(...hashArray);
-        const hashedKey = btoa(hashString);
-
-        // Prepare form data
         const formData = new URLSearchParams();
-        formData.append('security_key', hashedKey); // Include the hashed key
+        formData.append('security_key', hashedKey);
 
         const response = await fetch('https://login.smobu.cloud/check_session.php', {
-          method: 'POST', // Changed to POST
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: formData.toString(),
-          credentials: 'include', // Include credentials to send cookies
+          credentials: 'include',
         });
+
         const result = await response.json();
         if (result.loggedIn) {
           setIsAuthenticated(true);
@@ -50,6 +47,7 @@ function App() {
           setUsername('');
         }
       } catch (error) {
+        console.error('Error during session check:', error);
       }
     };
 
@@ -63,29 +61,19 @@ function App() {
 
   const handleLogout = async () => {
     try {
-      // Get the security key from the environment variable
       const securityKey = process.env.REACT_APP_SECURITY_KEY;
+      const hashedKey = await hashSecurityKey(securityKey);
 
-      // Hash the security key using the Web Crypto API and encode in Base64
-      const encoder = new TextEncoder();
-      const data = encoder.encode(securityKey);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      const hashString = String.fromCharCode(...hashArray);
-      const hashedKey = btoa(hashString);
-
-      // Prepare form data
       const formData = new URLSearchParams();
-      formData.append('security_key', hashedKey); // Include the hashed key
+      formData.append('security_key', hashedKey);
 
       await fetch('https://login.smobu.cloud/logout.php', {
-        method: 'POST', // Ensure method is POST
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formData.toString(),
-        credentials: 'include', // Include credentials to send cookies
+        credentials: 'include',
       });
+
       setIsAuthenticated(false);
       setUsername('');
     } catch (error) {
@@ -110,13 +98,13 @@ function MainApp({ isAuthenticated, username, handleLoginSuccess, handleLogout }
 
   useEffect(() => {
     if (location.pathname === '/login') {
-      document.body.classList.add('no-scroll'); // Disable scrolling on login page
+      document.body.classList.add('no-scroll');
     } else {
-      document.body.classList.remove('no-scroll'); // Enable scrolling on other pages
+      document.body.classList.remove('no-scroll');
     }
 
     return () => {
-      document.body.classList.remove('no-scroll'); // Cleanup on unmount
+      document.body.classList.remove('no-scroll');
     };
   }, [location.pathname]);
 
